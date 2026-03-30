@@ -5,25 +5,58 @@
   --font-serif: var(--font-playfair);
   --font-urdu: var(--font-urdu), 'Jameel Noori Nastaleeq', 'Nafees Nastaleeq', serif;
 
-  --color-deep-ink: #111111;
-  --color-faded-ink: #2b2b2b;
-  --color-old-paper: #e6dfd1;
-  --color-dark-paper: #d4c8b2;
-  --color-dusty-gold: #b39b74;
-  --color-sepia-shadow: rgba(43, 33, 22, 0.4);
+  --color-deep-ink: var(--color-text);
+  --color-faded-ink: var(--color-text-muted);
+  --color-old-paper: var(--color-bg);
+  --color-dark-paper: var(--color-bg-alt);
+  --color-dusty-gold: var(--color-accent);
+  --color-sepia-shadow: var(--color-shadow);
 }
 
 @layer base {
+
+  :root {
+    /* Subah (Morning/Default) */
+    --color-bg: #e6dfd1;
+    --color-bg-alt: #d4c8b2;
+    --color-text: #111111;
+    --color-text-muted: #2b2b2b;
+    --color-accent: #b39b74;
+    --color-shadow: rgba(43, 33, 22, 0.4);
+  }
+
+  [data-mood="shaam"] {
+    /* Shaam (Evening) */
+    --color-bg: #d4c1a5;
+    --color-bg-alt: #b8a280;
+    --color-text: #2b1d11;
+    --color-text-muted: #4a3422;
+    --color-accent: #8c603b;
+    --color-shadow: rgba(43, 29, 17, 0.6);
+  }
+
+  [data-mood="raat"] {
+    /* Raat (Night) */
+    --color-bg: #111111;
+    --color-bg-alt: #222222;
+    --color-text: #e6dfd1;
+    --color-text-muted: #b8a995;
+    --color-accent: #d4c8b2;
+    --color-shadow: rgba(0, 0, 0, 0.9);
+  }
+
   ::selection {
-    background-color: var(--color-dusty-gold);
-    color: var(--color-old-paper);
+    background-color: var(--color-accent);
+    color: var(--color-bg);
   }
 
   body {
-    background-color: #e6dfd1;
-    color: #111111;
+    background-color: var(--color-bg);
+    color: var(--color-text);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
+    cursor: none; /* Hide default cursor for custom ink cursor */
     
     /* Authentic Desi Paper Texture */
     background-image: 

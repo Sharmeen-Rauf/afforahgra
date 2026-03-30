@@ -37,7 +37,7 @@ function LiquidFashionMesh() {
         <MeshDistortMaterial
           ref={materialRef}
           map={texture}
-          color="#d4c8b2"
+          color="var(--color-bg-alt)"
           envMapIntensity={1.5}
           clearcoat={0.3}
           metalness={0.4}
@@ -105,8 +105,8 @@ export default function HeroScene() {
       <div ref={containerRef} className="absolute inset-0 z-10">
         <Canvas gl={{ antialias: true, alpha: true }} dpr={[1, 2]}>
           <OrthographicCamera makeDefault position={[0, 0, 5]} zoom={90} />
-          <ambientLight intensity={0.6} color="#e6dfd1" />
-          <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffffff" />
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[10, 10, 5]} intensity={1.5} />
           
           <Suspense fallback={null}>
             <LiquidFashionMesh />
@@ -123,7 +123,7 @@ export default function HeroScene() {
           initial={{ opacity: 0, filter: "blur(12px)", y: 15 }}
           animate={{ opacity: 0.8, filter: "blur(0px)", y: 0 }}
           transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
-          className="font-urdu text-4xl md:text-5xl lg:text-5xl leading-loose mb-10 text-[#111111]"
+          className="font-urdu text-4xl md:text-5xl lg:text-5xl leading-loose mb-10 text-deep-ink"
           dir="rtl"
         >
           لباس صرف پہنا نہیں جاتا، محسوس کیا جاتا ہے
@@ -134,7 +134,7 @@ export default function HeroScene() {
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 0.3 }}
           transition={{ duration: 2, delay: 1.5, ease: "easeInOut" }}
-          className="w-16 h-[2px] bg-[#111111] mb-8 rounded-[50%]"
+          className="w-16 h-[2px] bg-deep-ink mb-8 rounded-[50%]"
         />
 
         {/* English Brand Identity */}
@@ -143,10 +143,10 @@ export default function HeroScene() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 2 }}
         >
-          <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-serif text-[#111111] tracking-tighter uppercase drop-shadow-md">
+          <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-serif text-deep-ink tracking-tighter uppercase drop-shadow-md">
             Afforah
           </h1>
-          <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-[#111111]/80 font-mono mt-4 font-bold">
+          <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-faded-ink font-mono mt-4 font-bold">
             The South Asian Archive
           </p>
         </motion.div>
@@ -159,12 +159,12 @@ export default function HeroScene() {
         transition={{ duration: 1.5, delay: 4 }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4 opacity-60"
       >
-        <span className="text-[8px] uppercase tracking-[0.4em] text-[#111111] font-mono">Turn Page</span>
-        <div className="w-[1px] h-16 bg-[#111111]/20 overflow-hidden relative">
+        <span className="text-[8px] uppercase tracking-[0.4em] text-deep-ink font-mono">Turn Page</span>
+        <div className="w-[1px] h-16 bg-deep-ink/20 overflow-hidden relative">
           <motion.div 
             animate={{ y: ["-100%", "100%"] }}
             transition={{ repeat: Infinity, duration: 2.5, ease: "circInOut" }}
-            className="w-full h-1/2 bg-gradient-to-b from-transparent via-[#111111]/60 to-transparent"
+            className="w-full h-1/2 bg-gradient-to-b from-transparent via-deep-ink/60 to-transparent"
           />
         </div>
       </motion.div>
