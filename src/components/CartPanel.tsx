@@ -116,7 +116,7 @@ export default function CartPanel() {
                 </div>
                 
                 <button className="w-full bg-[#111111] text-[#e6dfd1] py-4 uppercase tracking-[0.3em] text-[10px] font-bold hover:bg-[#b39b74] transition-colors relative overflow-hidden group">
-                  <span className="relative z-10 w-full text-center block" style={{ transformLineHeight: 0 }}>Finalize Archive</span>
+                  <span className="relative z-10 w-full text-center block" style={{ lineHeight: 0 }}>Finalize Archive</span>
                 </button>
 
                 <p className="text-center font-urdu text-xl text-[#111111]/80 mt-6 mix-blend-multiply">

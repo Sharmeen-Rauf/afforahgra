@@ -72,7 +72,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   const handleAddToCart = () => {
     setAdding(true);
-    addItem({ ...product, quantity: 1 });
+    addItem(product);
     setTimeout(() => setAdding(false), 2000);
   };
 
