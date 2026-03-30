@@ -1,6 +1,7 @@
 import HeroScene from "@/components/HeroScene";
 import CollectionGrid from "@/components/CollectionGrid";
 import BookSection from "@/components/BookSection";
+import NewCollectionManuscript from "@/components/NewCollectionManuscript";
 import BrandStory from "@/components/BrandStory";
 import Footer from "@/components/Footer";
 
@@ -10,8 +11,10 @@ export default function Home() {
       <HeroScene />
       <CollectionGrid />
       <BookSection />
+      <NewCollectionManuscript />
       <BrandStory />
       <Footer />
     </main>
   );
 }
+
