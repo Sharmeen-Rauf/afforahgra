@@ -88,18 +88,30 @@ export default function HeroScene() {
     <section className="relative w-full h-screen overflow-hidden bg-transparent mt-[-10rem] md:mt-[-8rem]">
       
       {/* Background Cinematic Video */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none grayscale-[0.5] sepia-[0.4] opacity-30 mix-blend-multiply">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video 
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="w-full h-full object-cover blur-[2px] scale-105"
+          className="w-full h-full object-cover scale-110 opacity-50 sepia-[0.3]"
         >
-          {/* Abstract light/street movement video placeholder */}
           <source src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-238-large.mp4" type="video/mp4" />
         </video>
+        <div className="absolute inset-0 bg-[var(--color-bg)]/40" />
       </div>
+
+      {/* Secondary video for text clipping */}
+      <video 
+        id="hero-clip-video"
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        className="absolute inset-0 w-full h-full object-cover z-[5] pointer-events-none opacity-0"
+      >
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-238-large.mp4" type="video/mp4" />
+      </video>
 
       {/* 3D Liquid Canvas */}
       <div ref={containerRef} className="absolute inset-0 z-10">
@@ -137,13 +149,23 @@ export default function HeroScene() {
           className="w-16 h-[2px] bg-deep-ink mb-8 rounded-[50%]"
         />
 
-        {/* English Brand Identity */}
+        {/* English Brand Identity — Video Clip Text */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 2 }}
+          className="relative"
         >
-          <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-serif text-deep-ink tracking-tighter uppercase drop-shadow-md">
+          <h1 
+            className="text-5xl md:text-8xl lg:text-[10rem] font-serif tracking-tighter uppercase drop-shadow-md"
+            style={{
+              background: "linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 50%, var(--color-text) 100%)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              color: "transparent",
+            }}
+          >
             Afforah
           </h1>
           <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-faded-ink font-mono mt-4 font-bold">

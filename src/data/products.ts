@@ -4,7 +4,7 @@ export const products = [
     name: 'Siyah Resham Jora',
     category: 'Purani Yaadein',
     price: 115000,
-    image: 'https://images.unsplash.com/photo-1559551409-dadc959f76b8?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&q=80&w=800',
     colors: ['#2A2A2A', '#5C4033'],
     urduDesc: 'سیاہ ریشم کی تاروں میں بُنی ہوئی ایک خاموش داستان۔ وقت کے دامن سے نکلی ہوئی تہذیب۔'
   },
@@ -13,7 +13,7 @@ export const products = [
     name: 'Khaki Sufi Poshak',
     category: 'Khamosh Rang',
     price: 65000,
-    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&q=80&w=800',
     colors: ['#EAE6DF', '#1A1A1A'],
     urduDesc: 'سادگی میں چھپی ہوئی ایک گہری کشش۔ یہ لباس بدن کو نہیں، روح کو پہنایا جاتا ہے۔'
   },
@@ -22,7 +22,7 @@ export const products = [
     name: 'Gungunata Oon',
     category: 'Purani Yaadein',
     price: 185000,
-    image: 'https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&q=80&w=800',
     colors: ['#1A1A1A', '#4A4A4A'],
     urduDesc: 'سرد طویل راتوں میں یادوں کی طرح لپٹ جانے والا گرم اون۔'
   },
@@ -31,7 +31,7 @@ export const products = [
     name: 'Sheheri Musafir',
     category: 'Sheher ki Kahaniyan',
     price: 85000,
-    image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1507680434567-5739c80be1ac?auto=format&fit=crop&q=80&w=800',
     colors: ['#5C5C5C', '#2A2A2A'],
     urduDesc: 'شہر کے شور میں اپنے راستے خود تراشنے والوں کے لیے۔'
   },
@@ -40,7 +40,7 @@ export const products = [
     name: 'Neela Asmaan Denim',
     category: 'Sheher ki Kahaniyan',
     price: 95000,
-    image: 'https://images.unsplash.com/photo-1576871337622-98d48d1cf531?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&q=80&w=800',
     colors: ['#6B7A8F', '#4A5B6F'],
     urduDesc: 'نیلے آسمان جیسی وسعت اور مضبوطی۔ ہر سفر کا ساتھی۔'
   },
@@ -58,25 +58,25 @@ export const products = [
     name: 'Sunehri Dhaaga',
     category: 'Khamosh Rang',
     price: 145000,
-    image: 'https://images.unsplash.com/photo-1608667508764-33cf0726b13a?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1617627143233-46e3f5748e94?auto=format&fit=crop&q=80&w=800',
     colors: ['#EAE6DF', '#BDB7A6'],
     urduDesc: 'سنہری دھاگوں سے بُنی ہوئی ایک مدھم سی روشنی۔'
   },
   {
     id: '8',
-    name: 'Purana Kaghaz Denim',
+    name: 'Purana Kaghaz Kurta',
     category: 'Sheher ki Kahaniyan',
     price: 110000,
-    image: 'https://images.unsplash.com/photo-1542272454-3140f1a92e21?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=800',
     colors: ['#445A6D', '#2B3D4F'],
     urduDesc: 'پرانے خطوط کی طرح جو وقت گزرنے کے ساتھ مزید خوبصورت ہو جاتے ہیں۔'
   },
   {
     id: '9',
-    name: 'Kashmiri Resham Scarf',
+    name: 'Kashmiri Pashmina Shawl',
     category: 'Purani Yaadein',
     price: 45000,
-    image: 'https://images.unsplash.com/photo-1606788220037-d2c6c06a8ab9?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1601244005535-a48fae780d5c?auto=format&fit=crop&q=80&w=800',
     colors: ['#9B3226', '#E4D5B7'],
     urduDesc: 'روایت اور نرمی کا ایک حسین امتزاج۔'
   },
@@ -85,7 +85,7 @@ export const products = [
     name: 'Sufiyana Libaas',
     category: 'Khamosh Rang',
     price: 65000,
-    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800',
     colors: ['#F5F5F0', '#C4BFA6'],
     urduDesc: 'سکون کی تلاش میں الجھے ہوئے دلوں کے لیے۔'
   },
@@ -100,11 +100,12 @@ export const products = [
   },
   {
     id: '12',
-    name: 'Mitti Ke Kadam',
+    name: 'Mitti Ka Rang Kurta',
     category: 'Sheher ki Kahaniyan',
     price: 175000,
-    image: 'https://images.unsplash.com/photo-1620958197172-3510c4416181?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=800',
     colors: ['#8A6B4E', '#3E2F21'],
     urduDesc: 'مٹی سے جڑے قدم، جو اپنی منزل خود پہچانتے ہیں۔'
   }
 ];
+
