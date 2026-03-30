@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+  --font-urdu: var(--font-urdu), 'Jameel Noori Nastaleeq', 'Nafees Nastaleeq', serif;
+
+  --color-deep-ink: #111111;
+  --color-faded-ink: #2b2b2b;
+  --color-old-paper: #e6dfd1;
+  --color-dark-paper: #d4c8b2;
+  --color-dusty-gold: #b39b74;
+  --color-sepia-shadow: rgba(43, 33, 22, 0.4);
+}
+
+@layer base {
+  ::selection {
+    background-color: var(--color-dusty-gold);
+    color: var(--color-old-paper);
+  }
+
+  body {
+    background-color: #e6dfd1;
+    color: #111111;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    
+    /* Authentic Desi Paper Texture */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  }
+
+  /* Ink reveal animation for Urdu text */
+  .ink-reveal {
+    animation: inkSpread 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(10px);
+  }
+
+  @keyframes inkSpread {
+    0% {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(10px) scale(0.98);
+    }
+    100% {
+      opacity: 0.9;
+      filter: blur(0px);
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Urdu Typography Helper */
+  .font-urdu {
+    font-family: var(--font-urdu);
+    line-height: 2.2;
+    word-spacing: 0.2rem;
+  }
+}
+
+.desi-paper-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  mix-blend-mode: multiply;
+  opacity: 0.15;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1h2v2H1V1zm2 2h2v2H3V3zm2 2h2v2H5V5zm2 2h2v2H7V7zm2 2h2v2H9V9zm2 2h2v2h-2v-2zm2 2h2v2h-2v-2zm2 2h2v2h-2v-2zm2 2h2v2h-2v-2zm2 2h2v2h-2v-2z' fill='%235c4b37' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Hairlines for receipts and diary pages */
+.ink-line-top { border-top: 1px solid rgba(43, 43, 43, 0.15); }
+.ink-line-bottom { border-bottom: 1px solid rgba(43, 43, 43, 0.15); }
+.passe-partout::before, .passe-partout::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid rgba(43, 33, 22, 0.5);
+}
+.passe-partout::before { top: -3px; left: -3px; }
+.passe-partout::after { bottom: -3px; right: -3px; }
+
+/* Film grain noise overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Vintage Vignette */
+.vignette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 49;
+  background: radial-gradient(circle at center, transparent 30%, rgba(10, 9, 8, 0.8) 100%);
+}
+
+/* Hide scrollbar completely but allow scroll */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Elegant hairlines for vintage feeling */
+.hairline-top { border-top: 1px solid rgba(232, 220, 196, 0.15); }
+.hairline-bottom { border-bottom: 1px solid rgba(232, 220, 196, 0.15); }
+.hairline-left { border-left: 1px solid rgba(232, 220, 196, 0.15); }
+.hairline-right { border-right: 1px solid rgba(232, 220, 196, 0.15); }
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(10, 9, 8, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(232, 220, 196, 0.08);
+}
+
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+  display: flex;
+  width: max-content;
+}
