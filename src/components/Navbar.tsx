@@ -65,8 +65,14 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Right: Cart */}
-        <div className="flex-1 flex justify-end">
+        {/* Right: Dastaan + Cart */}
+        <div className="flex-1 flex justify-end items-center gap-6">
+          <Link
+            href="/dastaan"
+            className="hidden md:block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-ink/60 hover:text-dusty-gold transition-colors border-r border-deep-ink/10 pr-6"
+          >
+            Dastaan
+          </Link>
           <button
             onClick={toggleCart}
             className="text-deep-ink hover:text-dusty-gold transition-colors flex items-center gap-2 group"
