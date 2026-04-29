@@ -1,16 +1,65 @@
 "use client";
 
 import { useCartStore } from "@/store/cart";
-import { X, Minus, Plus } from "lucide-react";
+import { X, Minus, Plus, Loader2 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { addToCart, removeFromCart, updateCartQuantity } from "@/lib/shopify/cartActions";
 
 export default function CartPanel() {
-  const { isOpen, toggleCart, items, removeItem, updateQuantity } = useCartStore();
+  const { isOpen, toggleCart, items, cartId, setCart } = useCartStore();
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [checkingOut, setCheckingOut] = useState(false);
 
   const cartTotal = () => {
     return items.reduce((total, item) => total + (item.price * item.quantity), 0);
+  };
+
+  const handleUpdateQuantity = async (lineId: string, productId: string, currentQty: number, delta: number) => {
+    setUpdatingId(lineId);
+    try {
+      const newQty = currentQty + delta;
+      let newCart;
+      if (newQty <= 0) {
+        newCart = await removeFromCart(lineId);
+      } else {
+        newCart = await updateCartQuantity(lineId, newQty);
+      }
+      setCart(newCart);
+    } catch (e) {
+      console.error("Cart update error:", e);
+    } finally {
+      setUpdatingId(null);
+    }
+  };
+
+  const handleCheckout = async () => {
+    setCheckingOut(true);
+    // Shopify cart objects have a checkoutUrl
+    // We can fetch it or if we have the full cart object in state, use it.
+    // Since our Zustand store handles mapping, I'll fetch the fresh cart to be sure.
+    try {
+      // In a real app, you might want to redirect directly to cart.checkoutUrl
+      // We'll assume the cart object in our store might not have it yet, 
+      // so we use the store's cartId if available.
+      // But actually, we should store checkoutUrl in the store.
+      
+      // For now, let's just trigger a redirect to Shopify checkout if we had the URL.
+      // I'll update the store to include checkoutUrl.
+      const cartStore = useCartStore.getState();
+      // @ts-ignore - checkoutUrl might not be in the type yet
+      if (cartStore.checkoutUrl) {
+        // @ts-ignore
+        window.location.href = cartStore.checkoutUrl;
+      } else {
+        alert("Checkout URL not found. Please try again.");
+      }
+    } catch (e) {
+      console.error("Checkout error:", e);
+    } finally {
+      setCheckingOut(false);
+    }
   };
 
   const todayDate = new Date().toLocaleDateString('en-PK', {
@@ -71,21 +120,32 @@ export default function CartPanel() {
                     <div key={item.id} className="flex gap-4 group items-start border-b border-[#111111]/10 pb-6">
                       <div className="w-16 h-20 relative bg-[#e6dfd1] border border-[#111111]/20 p-1">
                         <div className="relative w-full h-full grayscale-[0.5] sepia-[0.3]">
-                          <Image src={item.image} alt={item.name} fill className="object-cover" />
+                          {item.image && <Image src={item.image} alt={item.name} fill className="object-cover" />}
                         </div>
                       </div>
                       
                       <div className="flex-1 space-y-2 text-[#111111]">
-                        <h3 className="text-xs font-bold leading-tight uppercase font-serif">{item.name}</h3>
-                        <p className="text-[10px] text-[#2b2b2b] tracking-wider">REF. 00{item.id}</p>
+                        <div className="flex justify-between items-start">
+                          <h3 className="text-xs font-bold leading-tight uppercase font-serif max-w-[150px]">{item.name}</h3>
+                          {updatingId === item.lineId && <Loader2 className="w-3 h-3 animate-spin text-[#b39b74]" />}
+                        </div>
+                        <p className="text-[10px] text-[#2b2b2b] tracking-wider truncate">REF. {item.id.split('/').pop()}</p>
                         
                         <div className="flex justify-between items-center mt-3 pt-2">
                           <div className="flex items-center gap-3 border border-[#111111]/20 px-2 py-1 bg-[#e6dfd1]/50">
-                            <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="hover:text-[#b39b74]">
+                            <button 
+                              onClick={() => handleUpdateQuantity(item.lineId, item.id, item.quantity, -1)} 
+                              disabled={!!updatingId}
+                              className="hover:text-[#b39b74] disabled:opacity-30"
+                            >
                               <Minus className="w-3 h-3" />
                             </button>
                             <span className="text-[10px] w-4 text-center">{item.quantity}</span>
-                            <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="hover:text-[#b39b74]">
+                            <button 
+                              onClick={() => handleUpdateQuantity(item.lineId, item.id, item.quantity, 1)}
+                              disabled={!!updatingId}
+                              className="hover:text-[#b39b74] disabled:opacity-30"
+                            >
                               <Plus className="w-3 h-3" />
                             </button>
                           </div>
@@ -115,8 +175,14 @@ export default function CartPanel() {
                   <span>PKR {cartTotal().toLocaleString()}</span>
                 </div>
                 
-                <button className="w-full bg-[#111111] text-[#e6dfd1] py-4 uppercase tracking-[0.3em] text-[10px] font-bold hover:bg-[#b39b74] transition-colors relative overflow-hidden group">
-                  <span className="relative z-10 w-full text-center block" style={{ lineHeight: 0 }}>Finalize Archive</span>
+                <button 
+                  onClick={handleCheckout}
+                  disabled={checkingOut}
+                  className="w-full bg-[#111111] text-[#e6dfd1] py-4 uppercase tracking-[0.3em] text-[10px] font-bold hover:bg-[#b39b74] transition-colors relative overflow-hidden group disabled:opacity-50"
+                >
+                  <span className="relative z-10 w-full text-center block" style={{ lineHeight: 0 }}>
+                    {checkingOut ? "Redirecting..." : "Finalize Archive"}
+                  </span>
                 </button>
 
                 <p className="text-center font-urdu text-xl text-[#111111]/80 mt-6 mix-blend-multiply">

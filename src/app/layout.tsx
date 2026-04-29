@@ -8,6 +8,8 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import BookLoader from "@/components/BookLoader";
 
+import CartSync from "@/components/CartSync";
+
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: 'swap' });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: 'swap' });
 const urdu = Noto_Nastaliq_Urdu({ subsets: ["arabic"], variable: "--font-urdu", weight: ["400", "700"], display: 'swap' });
@@ -26,6 +28,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable} ${urdu.variable}`}>
       <body className="antialiased font-sans relative overflow-x-hidden min-h-screen">
         <CustomCursor />
+        <CartSync />
         <BookLoader>
           {/* Old Paper Ambient Lighting */}
           <div className="fixed inset-0 pointer-events-none z-0 mix-blend-multiply opacity-40 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[var(--color-bg-alt)]/20 to-[var(--color-shadow)]" />
