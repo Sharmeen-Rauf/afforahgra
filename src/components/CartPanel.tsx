@@ -48,10 +48,10 @@ export default function CartPanel() {
       // For now, let's just trigger a redirect to Shopify checkout if we had the URL.
       // I'll update the store to include checkoutUrl.
       const cartStore = useCartStore.getState();
-      // @ts-ignore - checkoutUrl might not be in the type yet
-      if (cartStore.checkoutUrl) {
-        // @ts-ignore
-        window.location.href = cartStore.checkoutUrl;
+      const checkoutUrl = (cartStore as any).checkoutUrl;
+      
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
       } else {
         alert("Checkout URL not found. Please try again.");
       }
@@ -134,16 +134,16 @@ export default function CartPanel() {
                         <div className="flex justify-between items-center mt-3 pt-2">
                           <div className="flex items-center gap-3 border border-[#111111]/20 px-2 py-1 bg-[#e6dfd1]/50">
                             <button 
-                              onClick={() => handleUpdateQuantity(item.lineId, item.id, item.quantity, -1)} 
-                              disabled={!!updatingId}
+                              onClick={() => item.lineId && handleUpdateQuantity(item.lineId, item.id, item.quantity, -1)} 
+                              disabled={!!updatingId || !item.lineId}
                               className="hover:text-[#b39b74] disabled:opacity-30"
                             >
                               <Minus className="w-3 h-3" />
                             </button>
                             <span className="text-[10px] w-4 text-center">{item.quantity}</span>
                             <button 
-                              onClick={() => handleUpdateQuantity(item.lineId, item.id, item.quantity, 1)}
-                              disabled={!!updatingId}
+                              onClick={() => item.lineId && handleUpdateQuantity(item.lineId, item.id, item.quantity, 1)}
+                              disabled={!!updatingId || !item.lineId}
                               className="hover:text-[#b39b74] disabled:opacity-30"
                             >
                               <Plus className="w-3 h-3" />

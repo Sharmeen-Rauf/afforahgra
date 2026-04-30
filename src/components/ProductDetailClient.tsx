@@ -39,16 +39,28 @@ function ProductCloth3D({ image, size }: { image: string; size: string }) {
   );
 }
 
+import { addToCart } from "@/lib/shopify/cartActions";
+
 export default function ProductDetailClient({ product, related }: { product: any; related: any[] }) {
   const [selectedSize, setSelectedSize] = useState("M");
   const [adding, setAdding] = useState(false);
-  const addItem = useCartStore((state) => state.addItem);
+  const { addItem, setCart } = useCartStore();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     setAdding(true);
-    const variantId = product.variants?.[0]?.id;
-    addItem(product, variantId);
-    setTimeout(() => setAdding(false), 2000);
+    try {
+      const variantId = product.variants?.[0]?.id;
+      if (variantId) {
+        const newCart = await addToCart(variantId);
+        if (newCart) {
+          setCart(newCart);
+        }
+      }
+    } catch (e) {
+      console.error("Error adding to cart:", e);
+    } finally {
+      setTimeout(() => setAdding(false), 2000);
+    }
   };
 
   const sizes = ["S", "M", "L", "XL"];
