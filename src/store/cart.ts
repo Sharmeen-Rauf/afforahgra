@@ -12,6 +12,8 @@ export interface Product {
 
 export interface CartItem extends Product {
   quantity: number;
+  lineId?: string;
+  variantId?: string;
 }
 
 interface CartState {
@@ -19,10 +21,14 @@ interface CartState {
   isOpen: boolean;
   totalItems: number;
   totalPrice: number;
+  cartId: string | null;
+  checkoutUrl: string | null;
+  setCart: (cart: any) => void;
+  setCartId: (id: string) => void;
   toggleCart: () => void;
-  addItem: (product: Product) => void;
-  removeItem: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  addItem: (product: Product, variantId?: string) => void;
+  removeItem: (id: string, lineId?: string) => void;
+  updateQuantity: (id: string, quantity: number, lineId?: string) => void;
   clearCart: () => void;
 }
 
@@ -31,10 +37,43 @@ export const useCartStore = create<CartState>((set) => ({
   isOpen: false,
   totalItems: 0,
   totalPrice: 0,
+  cartId: null,
+  checkoutUrl: null,
+
+  setCartId: (id) => set({ cartId: id }),
+  
+  setCart: (cart) => {
+    if (!cart) return;
+    
+    const items = cart.lines.edges.map((edge: any) => {
+      const line = edge.node;
+      const product = line.merchandise.product;
+      const variant = line.merchandise;
+      
+      return {
+        id: product.id,
+        lineId: line.id,
+        variantId: variant.id,
+        name: product.title,
+        price: parseFloat(variant.price.amount),
+        image: product.images.edges[0]?.node.url,
+        quantity: line.quantity,
+        category: 'Archive', // Default
+      };
+    });
+
+    set({
+      items,
+      totalItems: cart.totalQuantity,
+      totalPrice: parseFloat(cart.cost.totalAmount.amount),
+      cartId: cart.id,
+      checkoutUrl: cart.checkoutUrl
+    });
+  },
 
   toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
 
-  addItem: (product) =>
+  addItem: (product, variantId) =>
     set((state) => {
       const existingItem = state.items.find((item) => item.id === product.id);
       
