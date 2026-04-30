@@ -1,5 +1,3 @@
-const domain = process.env.SHOPIFY_STORE_DOMAIN;
-const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 const apiVersion = '2024-01'; // or current version
 
 export async function shopifyFetch<T>({
@@ -22,12 +20,15 @@ export async function shopifyFetch<T>({
       body: { data: {} } as any
     };
   }
+
+  try {
+    const endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
     
     const result = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': storefrontAccessToken || '',
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken,
       },
       body: JSON.stringify({
         query,
