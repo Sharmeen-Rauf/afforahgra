@@ -36,7 +36,7 @@ export async function shopifyFetch<T>({
       }),
       cache,
       next: {
-        revalidate: 3600, // Revalidate every hour
+        revalidate: 60, // Revalidate every 60 seconds for faster updates during setup
       }
     });
 
