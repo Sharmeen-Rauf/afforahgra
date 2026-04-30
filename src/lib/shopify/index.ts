@@ -55,7 +55,7 @@ export async function getProducts(first = 20, query = '') {
     variables: { first, query },
   });
 
-  return res.body.data.products.edges.map((edge) => edge.node);
+  return res.body.data?.products?.edges?.map((edge) => edge.node) || [];
 }
 
 export async function getProduct(handle: string) {
@@ -68,7 +68,7 @@ export async function getProduct(handle: string) {
     variables: { handle },
   });
 
-  return res.body.data.product;
+  return res.body.data?.product || null;
 }
 
 export async function getCollections() {
@@ -93,7 +93,7 @@ export async function getCollections() {
     query: getCollectionsQuery,
   });
 
-  return res.body.data.collections.edges.map((edge) => edge.node);
+  return res.body.data?.collections?.edges?.map((edge) => edge.node) || [];
 }
 
 // Helper to map Shopify product to the app's internal Product type

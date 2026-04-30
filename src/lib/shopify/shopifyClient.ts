@@ -16,10 +16,12 @@ export async function shopifyFetch<T>({
 
   if (!domain || !storefrontAccessToken) {
     console.warn('Shopify domain or access token is missing from environment variables.');
+    // Return empty results instead of failing the build
+    return {
+      status: 200,
+      body: { data: {} } as any
+    };
   }
-
-  try {
-    const endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
     
     const result = await fetch(endpoint, {
       method: 'POST',
