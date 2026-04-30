@@ -11,6 +11,13 @@ export async function shopifyFetch<T>({
   variables?: any;
   cache?: RequestCache;
 }): Promise<{ status: number; body: T } | never> {
+  const domain = process.env.SHOPIFY_STORE_DOMAIN;
+  const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+
+  if (!domain || !storefrontAccessToken) {
+    console.warn('Shopify domain or access token is missing from environment variables.');
+  }
+
   try {
     const endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
     
@@ -18,7 +25,7 @@ export async function shopifyFetch<T>({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': storefrontAccessToken!,
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken || '',
       },
       body: JSON.stringify({
         query,

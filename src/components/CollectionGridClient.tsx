@@ -65,7 +65,7 @@ export default function CollectionGridClient({ initialProducts }: { initialProdu
               transition={{ duration: 1.5, delay: (index % 3) * 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="group relative flex flex-col items-center"
             >
-              <Link href={`/product/${product.id}`} className="block w-full">
+              <Link href={`/product/${product.handle || product.id}`} className="block w-full">
                 
                 {/* Physical Photo Print Effect */}
                 <div className={`relative w-[90%] mx-auto aspect-[3/4] bg-[#f7f4ea] p-4 pb-16 shadow-xl transition-all duration-700 ${rotate} group-hover:rotate-0 group-hover:shadow-2xl group-hover:-translate-y-2 border border-[#b8a995]/40`}>
